@@ -24,29 +24,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.218" />
+            app:layout_constraintVertical_bias="0.232" />
 
         <ProgressBar
             android:id="@+id/pb_downLoad_percent"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:progress="@{viewmodel.downloadProgress}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_requestZipFile"
+            app:layout_constraintStart_toStartOf="@+id/btn_requestZipFile"
             app:layout_constraintTop_toBottomOf="@+id/btn_requestZipFile" />
 
         <Button
             android:id="@+id/btn_unZip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:visibility="@{viewmodel.downloadProgress &lt; 100 ? View.INVISIBLE : View.VISIBLE}"
-            android:text="압축해제"
+            android:text="압축 해제"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_unZipResult"
             app:layout_constraintEnd_toEndOf="@+id/pb_downLoad_percent"
-            app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="@+id/pb_downLoad_percent"
             app:layout_constraintTop_toBottomOf="@+id/pb_downLoad_percent" />
 
@@ -54,11 +53,13 @@
             android:id="@+id/tv_unZipResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@{Boolean.toString(viewmodel.isUnZip)}"
+            android:text="@{viewmodel.isUnZip ? @string/unzip_success : @string/empty_string}"
+            android:visibility="@{viewmodel.downloadProgress &lt; 100 ? View.INVISIBLE : View.VISIBLE}"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btn_unZip"
             app:layout_constraintStart_toStartOf="@+id/btn_unZip"
-            app:layout_constraintTop_toBottomOf="@+id/btn_unZip" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_unZip"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

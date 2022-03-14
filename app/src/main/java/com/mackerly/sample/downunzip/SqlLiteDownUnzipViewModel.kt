@@ -16,7 +16,7 @@ import java.io.*
 import java.lang.Exception
 import java.util.zip.ZipException
 
-class SqlLiteDownUnzipViewModel(context: Context): ViewModel(){
+class SqlLiteDownUnzipViewModel: ViewModel(){
     private var _downloadProgress = MutableLiveData<Int>()
     val downloadProgress: LiveData<Int>
         get() = _downloadProgress
@@ -49,11 +49,7 @@ class SqlLiteDownUnzipViewModel(context: Context): ViewModel(){
         }
     }
 
-    // TODO; coroutine
     fun unZip() {
-        viewModelScope.launch {
-
-        }
         val sourcePath = downloadPath.value
         val targetPath = sourcePath?.replace(".zip", "")
         Log.d(TAG, "unZip filePath: $sourcePath , targetPath: $targetPath")
@@ -66,7 +62,6 @@ class SqlLiteDownUnzipViewModel(context: Context): ViewModel(){
         }
     }
 
-    //TODO; coroutine
     private fun writeResponseBodyToDisk(responseBody: ResponseBody, targetFilePath: String) {
         var bodyIs: InputStream? = null
         var os: OutputStream? = null
