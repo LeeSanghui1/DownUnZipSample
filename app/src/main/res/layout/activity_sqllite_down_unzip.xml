@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.mackerly.sample.downunzip.SqlLiteDownUnzipViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SqlLiteDownUnzipActivity">
+
+        <Button
+            android:id="@+id/btn_requestZipFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다운로드"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.218" />
+
+        <ProgressBar
+            android:id="@+id/pb_downLoad_percent"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:progress="@{viewmodel.downloadProgress}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_requestZipFile" />
+
+        <Button
+            android:id="@+id/btn_unZip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:visibility="@{viewmodel.downloadProgress &lt; 100 ? View.INVISIBLE : View.VISIBLE}"
+            android:text="압축해제"
+            app:layout_constraintEnd_toEndOf="@+id/pb_downLoad_percent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="@+id/pb_downLoad_percent"
+            app:layout_constraintTop_toBottomOf="@+id/pb_downLoad_percent" />
+
+        <TextView
+            android:id="@+id/tv_unZipResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@{Boolean.toString(viewmodel.isUnZip)}"
+            app:layout_constraintEnd_toEndOf="@+id/btn_unZip"
+            app:layout_constraintStart_toStartOf="@+id/btn_unZip"
+            app:layout_constraintTop_toBottomOf="@+id/btn_unZip" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
