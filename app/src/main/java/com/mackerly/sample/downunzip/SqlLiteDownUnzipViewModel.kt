@@ -1,6 +1,5 @@
 package com.mackerly.sample.downunzip
 
-import android.content.Context
 import android.os.Environment
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -52,7 +51,6 @@ class SqlLiteDownUnzipViewModel: ViewModel(){
     fun unZip() {
         val sourcePath = downloadPath.value
         val targetPath = sourcePath?.replace(".zip", "")
-        Log.d(TAG, "unZip filePath: $sourcePath , targetPath: $targetPath")
         try {
             ZipFile(sourcePath).extractAll(targetPath)
             _isUnZip.value = true
